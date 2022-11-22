@@ -6,7 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
-
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "94c2c66a186e42858632b75b8e825ff3"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
   <style>
     button {
       margin: 3px;
@@ -102,6 +108,68 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // Step2
+    for (let i = 0; i < errorBtns.length; i++){
+      let currBtn = errorBtns[i]
+      currBtn.addEventListener('click', () => {
+        switch(currBtn.innerHTML) {
+          case 'Console Log':
+            console.log('Console Log Demo')
+            break
+          case 'Console Error':
+            console.error('Console Error Demo')
+            break
+          case 'Console Table':
+            console.table(['Console', 'Table', 'Demo'])
+            break
+          case 'Console Dir':
+            console.dir({'Msg': 'Console Dir Demo', 'Type': 'Console Dir'})
+            break
+          case 'Console dirxml':
+            console.dirxml(document.getElementById('error-btns'))
+            break
+          case 'Console Group Start':
+            console.group('Console Group Start')
+            break
+          case 'Console Group End':
+            console.groupEnd()
+            break
+          case 'Start Timer':
+            console.time('Timer')
+            break
+          case 'End Timer':
+            console.timeEnd('Timer')
+            break
+          case 'Console Trace':
+            console.trace(currBtn)
+            break
+        }
+      })
+    }
+
+    //Step3&4
+    class IndexError extends Error{
+      constructor(message) {
+        super(message)
+        this.name = 'IndexError'
+      }
+    }
+    for (let i = -1; i <= errorBtns.length; i++){
+      try {
+        if (i < 0) throw new IndexError('Negative Index Error')
+        console.log('Curr Button is: ' + errorBtns[i].innerHTML)
+      }
+      catch(err) {
+        console.error(err)
+      }
+      finally {
+        console.log('Visited')
+      }
+    }
+
+    window.onerror = console.log('An Error is catched!!!')
+    window.onerror = window.alert('An Error is catched!!!')
   </script>
 </body>
 
