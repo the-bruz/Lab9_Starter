@@ -144,8 +144,15 @@
           case 'Console Trace':
             console.trace(currBtn)
             break
+          case 'Trigger a Global Error':
+            thisTriggersError()
+            break
         }
       })
+    }
+
+    function thisTriggersError(){
+      return notDefined
     }
 
     //Step3&4
@@ -168,8 +175,7 @@
       }
     }
 
-    window.onerror = console.log('An Error is catched!!!')
-    window.onerror = window.alert('An Error is catched!!!')
+    window.addEventListener("error", (event) => {console.log('An Error is catched!!!')})
   </script>
 </body>
 
